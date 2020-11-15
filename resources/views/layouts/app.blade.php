@@ -1,35 +1,29 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <title>Jalen}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-      <nav class="nav has-shadow" >
+  <div id="app">
+    <nav class="nav has-shadow" >
       <div class="container">
         <div class="nav-left">
           <a class="nav-item is-paddingless" href="{{route('home')}}">
-            <img src="{{asset('images/devmarketer-logo.png')}}" alt="DevMarketer logo">
+            <img src="{{asset('images/jalen-logo.png')}}" alt="Jalen logo">
           </a>
           <a class="nav-item is-tab is-hidden-mobile m-l-10">Blog</a>
           <a class="nav-item is-tab is-hidden-mobile">Youtube</a>
-          <a class="nav-item is-tab is-hidden-mobile">Calendar</a>
+          <a class="nav-item is-tab is-hidden-mobile">Discuss</a>
         </div>
         <span class="nav-toggle">
           <span></span>
@@ -39,10 +33,10 @@
         <div class="nav-right nav-menu" style="overflow: visible">
           <a class="nav-item is-tab is-hidden-tablet is-active">Blog</a>
           <a class="nav-item is-tab is-hidden-tablet">Youtube</a>
-          <a class="nav-item is-tab is-hidden-tablet">Calendar</a>
+          <a class="nav-item is-tab is-hidden-tablet">Discuss</a>
           @if (Auth::guest())
             <a class="nav-item is-tab">Login</a>
-            <a class="nav-item is-tab">Join the Community</a>
+            <a class="nav-item is-tab">Signup</a>
           @else
             <div class="dropdown">
               <button class="nav-item is-tab dropdown-toggle">
@@ -91,6 +85,7 @@
         {{-- <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
+
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
@@ -98,16 +93,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
+
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
+
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -119,6 +117,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
+
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -126,6 +125,7 @@
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
+
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
@@ -138,7 +138,10 @@
             </div>
         </nav> --}}
 
-            @yield('content')
+        @yield('content')
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
