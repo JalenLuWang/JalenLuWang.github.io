@@ -1,147 +1,80 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Jalen</title>
+    <title>JalenBlog</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-  <div id="app">
-    <nav class="nav has-shadow" >
-      <div class="container">
-        <div class="nav-left">
-          <a class="nav-item is-paddingless" href="{{route('home')}}">
-            <img src="{{asset('images/jalen-logo.png')}}" alt="Jalen logo">
-          </a>
-          <a class="nav-item is-tab is-hidden-mobile m-l-10">Blog</a>
-          <a class="nav-item is-tab is-hidden-mobile">Youtube</a>
-          <a class="nav-item is-tab is-hidden-mobile">Discuss</a>
-        </div>
-        <span class="nav-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-        <div class="nav-right nav-menu" style="overflow: visible">
-          <a class="nav-item is-tab is-hidden-tablet is-active">Blog</a>
-          <a class="nav-item is-tab is-hidden-tablet">Youtube</a>
-          <a class="nav-item is-tab is-hidden-tablet">Discuss</a>
-          @if (Auth::guest())
-            <a class="nav-item is-tab">Login</a>
-            <a class="nav-item is-tab">Signup</a>
-          @else
-            <div class="dropdown">
-              <button class="nav-item is-tab dropdown-toggle">
-                <figure class="image is-16x16" style="margin-right: 8px;">
-                  <img src="http://bulma.io/images/jgthms.png">
-                </figure>
-
-              </button>
-              <button class="dropdown is-aligned-right nav-item is-tab" >
-                Hey {{ Auth::user()->name }}
-                <ul class="dropdown-menu" style="overflow: visible;">
-                  <li><a href="#">
-                        <span class="icon">
-                          <i class="fa fa-fw fa-user-circle-o m-r-5"></i>
-                        </span>Profile
-                      </a>
-                  </li>
-                  <li><a href="#">
-                        <span class="icon">
-                          <i class="fa fa-fw fa-bell m-r-5"></i>
-                        </span>Notifications
-                      </a>
-                  </li>
-                  <li><a href="#">
-                        <span class="icon">
-                          <i class="fa fa-fw fa-cog m-r-5"></i>
-                        </span>Settings
-                      </a>
-                  </li>
-                  <li class="seperator"></li>
-                  <li><a href="{{route('logout')}}" onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-                        <span class="icon">
-                          <i class="fa fa-fw fa-sign-out m-r-5"></i>
-                        </span>
-                        Logout
-                      </a>
-                  </li>
-                </ul>
-              </button>
-            </div>
-          @endif
-        </div>
-      </div>
-    </nav>
-        {{-- <nav class="navbar navbar-default navbar-static-top">
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
+                    <ul class="navbar-nav mr-auto">
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                @if (Route::has('register'))
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                @endif
+                            </li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                        {{ __('Logout') }}
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
                             </li>
-                        @endif
+                        @endguest
                     </ul>
                 </div>
             </div>
-        </nav> --}}
+        </nav>
 
-        @yield('content')
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

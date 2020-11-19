@@ -1,20 +1,17 @@
 // Fonts
-//@import url('https://fonts.googleapis.com/css?family=Nunito');
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
-// Font Awesome
-@import 'node_modules/font-awesome/scss/font-awesome';
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
 
-// Bulma
-@import 'node_modules/bulma/bulma';
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
 
-// Bulma Vue Modules
-@import 'node_modules/buefy/src/scss/buefy';
-
-// SASS Pages
-@import 'overrides';
-@import 'helpers';
-@import 'styles';
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
