@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>JalenBlog</title>
+    <title>Blitzbullet's Blog</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,8 +24,11 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{asset('images/jalen-logo.png')}}" alt="DevMarketer Logo" />
+                    <img src="{{asset('images/jalen-logo.png')}}" alt="jalen Logo" />
                 </a>
+                <a class="nav-item is-tab is-hidden-mobile m-l-10">Learn</a>
+                <a class="nav-item is-tab is-hidden-mobile">Discuss</a>
+                <a class="nav-item is-tab is-hidden-mobile">Share</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
