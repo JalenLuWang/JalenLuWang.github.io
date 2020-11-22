@@ -26,9 +26,6 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{asset('images/jalen-logo.png')}}" alt="jalen Logo" />
                 </a>
-                <a class="nav-item is-tab is-hidden-mobile m-l-10">Learn</a>
-                <a class="nav-item is-tab is-hidden-mobile">Discuss</a>
-                <a class="nav-item is-tab is-hidden-mobile">Share</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
